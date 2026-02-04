@@ -8,8 +8,9 @@ export default function HomePage() {
   const [isYes, setIsYes] = useState(false);
 
   const moveButton = () => {
-    const randomX = Math.random() * (window.innerWidth - 100);
-    const randomY = Math.random() * (window.innerHeight - 50);
+    const padding = 20;
+    const randomX = Math.random() * (window.innerWidth - 100) + padding;
+    const randomY = Math.random() * (window.innerHeight - 50) + padding;
     setNoPos({ x: randomX, y: randomY });
     setHasMoved(true);
   };
@@ -59,24 +60,26 @@ export default function HomePage() {
             YES
           </button>
 
-          {!isYes && (
-            <button
-              onMouseEnter={moveButton}
-              style={
-                hasMoved
-                  ? {
-                      position: "fixed",
-                      left: `${noPos.x}px`,
-                      top: `${noPos.y}px`,
-                      zIndex: 999,
-                    }
-                  : { position: "relative" }
-              }
-              className="p-4 bg-red-500 text-white rounded-lg px-8 font-bold transition-all duration-150"
-            >
-              NO
-            </button>
-          )}
+          <button
+            onMouseEnter={moveButton}
+            onTouchStart={(e) => {
+              e.preventDefault();
+              moveButton();
+            }}
+            style={
+              hasMoved
+                ? {
+                    position: "fixed",
+                    left: `${noPos.x}px`,
+                    top: `${noPos.y}px`,
+                    zIndex: 999,
+                  }
+                : { position: "relative" }
+            }
+            className="p-4 bg-red-500 text-white rounded-lg px-8 font-bold transition-all duration-150 touch-none"
+          >
+            NO
+          </button>
         </div>
       </div>
     </div>
