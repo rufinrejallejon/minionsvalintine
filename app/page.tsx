@@ -60,26 +60,28 @@ export default function HomePage() {
             YES
           </button>
 
-          <button
-            onMouseEnter={moveButton}
-            onTouchStart={(e) => {
-              e.preventDefault();
-              moveButton();
-            }}
-            style={
-              hasMoved
-                ? {
-                    position: "fixed",
-                    left: `${noPos.x}px`,
-                    top: `${noPos.y}px`,
-                    zIndex: 999,
-                  }
-                : { position: "relative" }
-            }
-            className="p-4 bg-red-500 text-white rounded-lg px-8 font-bold transition-all duration-150 touch-none"
-          >
-            NO
-          </button>
+          {!isYes && (
+            <button
+              onMouseEnter={moveButton}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                moveButton();
+              }}
+              style={
+                hasMoved
+                  ? {
+                      position: "fixed",
+                      left: `${noPos.x}px`,
+                      top: `${noPos.y}px`,
+                      zIndex: 999,
+                    }
+                  : { position: "relative" }
+              }
+              className="p-4 bg-red-500 text-white rounded-lg px-8 font-bold transition-all duration-150 touch-none"
+            >
+              NO
+            </button>
+          )}
         </div>
       </div>
     </div>
